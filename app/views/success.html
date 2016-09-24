@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+    <title>Courses</title>
+</head>
+  <style type="text/css">
+
+    .container {
+        position: relative;
+        text-align: center;
+        background-color: #fff
+    }
+    .container:before {
+        content: "";
+        position: relative;
+        display: inline-block;
+        width: 0; height: 100%;
+        vertical-align: middle;
+    }
+    .container-fluid {
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .panel-body {
+        text-align: left;
+    }
+  </style>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-3"><strong>Hello!</strong> Are you sure you want to delete the following course?</h1>
+            <p class="lead">Please enter the following information below:</p>
+            <hr class="m-y-2">
+            </p>
+            <div class = "panel-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th> ID </th>
+                            <th>Course Name</th>
+                            <th>Description</th>
+                            <th>Date Added</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for course in course %}
+                            <tr>
+                            <td> {{ course['id'] }} </td>
+                            <td>{{ course['title'] }}</td>
+                            <td>{{ course['description']}}</td>
+                            <td>{{ course['created_at'] }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+                <form action='/courses/reset' method='GET'>
+                    <button type="submit" class="btn btn-secondary">No</button>
+                </form>
+                <form action="/courses/delete/{{ course['id'] }}" method='POST'>
+                    <button type="submit" class="btn btn-danger">Yes! I want to delete this.</button>
+                </form>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>    
